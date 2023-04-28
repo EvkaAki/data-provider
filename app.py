@@ -10,12 +10,16 @@ app = Flask(__name__)
 
 
 def data_stream(data):
+    return "App Running"
+
 #     for entry in data:
 #         yield crypt.decrypt(entry['line'])
 
 
 @app.route('/stream/<database>/<collection>.csv')
 def route_action(database, collection):
+    return "App Running"
+
 #     db = connection.get_db(database)
 #     if database == "system" or collection == "acl":
 #         abort(401)
@@ -39,6 +43,8 @@ def index_action():
 @click.argument('database')
 @click.argument('collection')
 def import_csv_command(database, collection):
+    return "App Running"
+
 #     file_path = "./csv/" + collection + ".csv"
 #     if os.path.exists(file_path):
 #         db = connection.get_db(database)

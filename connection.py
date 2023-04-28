@@ -12,4 +12,6 @@ password = os.getenv('MONGODB_PASS', 'password')
 
 
 def get_db(db):
+    return "App Running"
+
 #     return connection[db]

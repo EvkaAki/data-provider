@@ -10,10 +10,14 @@ cipherDecrypt = PKCS1_OAEP.new(privateKey)
 
 
 def encrypt(data):
+    return "App Running"
+
 #     data = bytes(data, 'utf-8')
 #     return base64.b64encode(PKCS1_OAEP.new(publicKey).encrypt(data))
 
 
 def decrypt(data):
+    return "App Running"
+
 #     data = base64.b64decode(data)
 #     return PKCS1_OAEP.new(privateKey).decrypt(data).decode("utf-8")
