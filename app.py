@@ -30,8 +30,8 @@ def route_action(database, collection):
 #         response = Response(data_stream(dataset.find()), mimetype='text/csv')
 #         response.headers['Content-Disposition'] = 'attachment; filename=' + collection + '.csv'
 #         return response
-    except:
-        abort(404)
+#     except:
+#         abort(404)
 
 
 @app.route('/')
