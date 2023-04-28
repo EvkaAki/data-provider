@@ -2,22 +2,20 @@ import base64
 from Crypto.PublicKey import RSA
 from Crypto.Cipher import PKCS1_OAEP
 
-# publicKey = RSA.importKey(open("keys/id_rsa.pem").read())
-# privateKey = RSA.importKey(open("keys/id_rsa.pem").read())
+publicKey = RSA.importKey(open("keys/id_rsa").read())
+privateKey = RSA.importKey(open("keys/id_rsa.pub").read())
 
-# cipherEncrypt = PKCS1_OAEP.new(publicKey)
-# cipherDecrypt = PKCS1_OAEP.new(privateKey)
+cipherEncrypt = PKCS1_OAEP.new(publicKey)
+cipherDecrypt = PKCS1_OAEP.new(privateKey)
 
 
 def encrypt(data):
-    return "App Running"
 
-#     data = bytes(data, 'utf-8')
-#     return base64.b64encode(PKCS1_OAEP.new(publicKey).encrypt(data))
+    data = bytes(data, 'utf-8')
+    return base64.b64encode(PKCS1_OAEP.new(publicKey).encrypt(data))
 
 
 def decrypt(data):
-    return "App Running"
 
-#     data = base64.b64decode(data)
-#     return PKCS1_OAEP.new(privateKey).decrypt(data).decode("utf-8")
+    data = base64.b64decode(data)
+    return PKCS1_OAEP.new(privateKey).decrypt(data).decode("utf-8")
