@@ -2,8 +2,8 @@ import base64
 from Crypto.PublicKey import RSA
 from Crypto.Cipher import PKCS1_OAEP
 
-publicKey = RSA.importKey(open("keys/public.pem").read())
-privateKey = RSA.importKey(open("keys/private.pem").read())
+publicKey = RSA.importKey(open("keys/id_rsa.pem").read())
+privateKey = RSA.importKey(open("keys/id_rsa.pem").read())
 
 cipherEncrypt = PKCS1_OAEP.new(publicKey)
 cipherDecrypt = PKCS1_OAEP.new(privateKey)
