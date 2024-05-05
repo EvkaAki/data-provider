@@ -13,7 +13,7 @@ import crypt
 app = Flask(__name__)
 
 db_core = connection.get_db('dataprovider_core')
-
+password = b"examplePassword"
 
 def get_kubeflow_user(auth_service_session):
     cookies = {'authservice_session': auth_service_session}
@@ -110,6 +110,7 @@ def available_datasets():
     access_list = list(db_core.dataset_access.find({"user_id": user_id}))
     dataset_ids = [access['dataset_id'] for access in access_list]
     datasets = list(db_core.datasets.find({"uuid": {"$in": dataset_ids}}))
+
     return Response(json_util.dumps(datasets), mimetype='application/json'), 200
 
 
@@ -193,7 +194,7 @@ def import_csv_command(database, collection):
 
         with open(file_path) as file:
             for line in file.readlines():
-                dataset.insert_one({"line": crypt.encrypt(line)})
+                dataset.insert_one({"line": crypt.encrypt(line, password)})
     else:
         print("File " + collection + ".csv not found in csv directory.")
 
@@ -213,7 +214,7 @@ def import_csv_command(collection, name):
         with open(full_path, newline='') as file:
             reader = csv.reader(file)
             for line in reader:
-                encrypted_line = crypt.encrypt(','.join(line))
+                encrypted_line = crypt.encrypt(','.join(line), password)
                 db_full[collection].insert_one({"line": encrypted_line})
 
         db_anonymized[collection].drop()
