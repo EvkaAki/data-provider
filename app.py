@@ -17,7 +17,7 @@ password = b"examplePassword"
 
 def get_kubeflow_user(auth_service_session):
     cookies = {'authservice_session': auth_service_session}
-    response = requests.get(url='http://dp.host.haus/api/workgroup/env-info', cookies=cookies)
+    response = requests.get(url='https://kubeflowthesis.com/api/workgroup/env-info', cookies=cookies)
 
     if response.status_code == 200:
         try:
