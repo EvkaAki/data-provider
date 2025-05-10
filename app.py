@@ -37,7 +37,7 @@ def is_admin(auth_service_session):
 
 def data_stream(data):
     for entry in data:
-        yield crypt.decrypt(entry['line'])
+        yield crypt.decrypt(entry['line'], password)
 
 
 # @app.route('/stream/<database>/<collection>.csv')
@@ -171,7 +171,7 @@ def stream_full():
 
     def generate():
         for record in dataset_data:
-            yield str(crypt.decrypt(record['line'])) + '\n'
+            yield str(crypt.decrypt(record['line'], password)) + '\n'
 
     return Response(generate(), mimetype='text/csv',
                     headers={"Content-Disposition": "attachment;filename=" + dataset['identifier'] + ".csv"})
@@ -194,7 +194,7 @@ def import_csv_command(database, collection):
 
         with open(file_path) as file:
             for line in file.readlines():
-                dataset.insert_one({"line": crypt.encrypt(line, password)})
+                dataset.insert_one({"line": crypt.encrypt(line.encode(), password)})
     else:
         print("File " + collection + ".csv not found in csv directory.")
 
