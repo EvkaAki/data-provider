@@ -214,7 +214,7 @@ def import_csv_command(collection, name):
         with open(full_path, newline='') as file:
             reader = csv.reader(file)
             for line in reader:
-                encrypted_line = crypt.encrypt(','.join(line), password)
+                encrypted_line = crypt.encrypt(','.join(line).encode('utf-8'), password)
                 db_full[collection].insert_one({"line": encrypted_line})
 
         db_anonymized[collection].drop()
